@@ -1,4 +1,4 @@
-let emailExpr = [%re "/^([a-z0-9_\-.])+@([a-z0-9_\-.])+\.([a-z]{2,4})$/i"];
+let emailExpr = [%re "/^([a-z0-9_\\-.])+@([a-z0-9_\\-.])+\\.([a-z]{2,4})$/i"];
 
 let isGreatOrEq = (x: option(int), value: float): bool =>
   switch (x) {
@@ -12,26 +12,26 @@ let isLowOrEq = (x: option(int), value: float): bool =>
   | None => true
   };
 
-let email = (value: string): bool => Js.Re.test_(emailExpr, value);
+let isEmail = (value: string): bool => Js.Re.test_(emailExpr, value);
 
-let inclusion = (xs: list(string), x: string): bool =>
+let isIncluded = (xs: list(string), x: string): bool =>
   xs |> List.filter(x' => x' == x) |> List.length >= 1;
 
-let length =
+let hasLength =
     (~min: option(int)=?, ~max: option(int)=?, (), value: string): bool => {
   let charLength = value->String.length->float_of_int;
   isLowOrEq(min, charLength) && isGreatOrEq(max, charLength);
 };
 
-let numericality = (value: string): bool =>
+let isNumber = (value: string): bool =>
   !value->Js.Float.fromString->Js.Float.isNaN;
 
-let limit = (~min: option(int)=?, ~max: option(int)=?, (), value: string) =>
-  if (numericality(value)) {
+let hasLimit = (~min: option(int)=?, ~max: option(int)=?, (), value: string) =>
+  if (isNumber(value)) {
     let parsed = value->Js.Float.fromString;
     isLowOrEq(min, parsed) && isGreatOrEq(max, parsed);
   } else {
     false;
   };
 
-let presence = length(~min=1, ());
+let isPresent = hasLength(~min=1, ());
