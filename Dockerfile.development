@@ -1,0 +1,21 @@
+FROM debian:stretch 
+
+EXPOSE 8000
+
+WORKDIR /opt/app
+
+RUN apt-get update \
+  && apt-get -y install curl build-essential git \
+  && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+  && apt-get install -y nodejs
+
+RUN npm install -g yarn --unsafe-perm --verbose \
+  && yarn global add rtop reason-cli@latest-linux bs-platform --verbose
+
+COPY package.json .
+COPY yarn.lock .
+COPY bsconfig.json .
+
+RUN yarn install --verbose
+
+CMD ["yarn", "server"]
