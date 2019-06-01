@@ -10,17 +10,20 @@ describe("<ErrorMessage />", () => {
       <ErrorMessage> "Some Error Message"->React.string </ErrorMessage>,
     );
 
-  let find = (wrapper, selector) => wrapper |> Enzyme.Shallow.find(selector);
+  let find = Enzyme.Shallow.find;
+  let length = Enzyme.Shallow.length;
+  let props = Enzyme.Shallow.jsProps;
+  let text = Enzyme.Shallow.text;
 
   test("renders children", () =>
-    expect(Enzyme.Shallow.text(wrapper)) |> toBe("Some Error Message")
+    wrapper |> text |> expect |> toBe("Some Error Message")
   );
 
   test("renders a <span />", () =>
-    expect(wrapper->find("span") |> Enzyme.Shallow.length) |> toBe(1)
+    wrapper |> find("span") |> length |> expect |> toBe(1)
   );
 
   test("it includes default class", () =>
-    expect(wrapper->Enzyme.Shallow.jsProps##className) |> not_ |> toBe("")
+    wrapper->props##className |> expect |> not_ |> toBe("")
   );
 });
