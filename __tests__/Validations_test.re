@@ -17,19 +17,39 @@ describe("Validations", () => {
   describe("length", () => {
     open Expect;
 
-    describe("It defaults to minimum 5 chars", () => {
-      test("it returns false if shorter tham min", () =>
-        expect("foo" |> length()) |> toBe(false)
+    describe("with min", () => {
+      test("return true if greater or equal to min", () =>
+        expect("foo" |> length(~min=3, ())) |> toBe(true)
       );
 
-      test("It returns true if length greater or equal to min", () =>
-        expect("foobar" |> length()) |> toBe(true)
+      test("return false if lower than min", () => 
+        expect("foo" |> length(~min=5, ())) |> toBe(false)
       );
     });
 
-    test("It can receive new min length", () =>
-      expect("foo" |> length(~min=3, ())) |> toBe(true)
-    );
+    describe("with max", () => {
+      test("return true if lower or equal to max", () =>
+        expect("foo" |> length(~max=3, ())) |> toBe(true)
+      );
+
+      test("return false if greater than max", () =>
+        expect("foo" |> length(~max=2, ())) |> toBe(false)
+      );
+    });
+
+    describe("with min and max", () => {
+      test("return true if within limit", () => 
+        expect("foo" |> length(~min=1, ~max=5, ())) |> toBe(true)
+      );
+
+      test("return false if outside of limit (gt)", () =>
+        expect("foobar" |> length(~min=1, ~max=3, ())) |> toBe(false)
+      );
+
+      test("return false if outside of limit (lt)", () =>
+        expect("foo" |> length(~min=5, ~max=10, ())) |> toBe(false)
+      );
+    });
   });
 
   describe("presence", () => {
@@ -64,7 +84,7 @@ describe("Validations", () => {
         expect("1" |> limit(~min=5, ())) |> toBe(false)
       );
 
-      test("it returns true if more than min", () =>
+      test("it returns true if greater or equal than min", () =>
         expect("5" |> limit(~min=1, ())) |> toBe(true)
       );
     });
@@ -74,7 +94,7 @@ describe("Validations", () => {
         expect("10" |> limit(~max=5, ())) |> toBe(false)
       );
 
-      test("it returns true when less than max", () =>
+      test("it returns true when less or equal than max", () =>
         expect("5" |> limit(~max=10, ())) |> toBe(true)
       );
     });

@@ -19,7 +19,7 @@ module EnhancedInput = {
     <InputWithValidation
       id="name"
       label="Name*"
-      validation={length(~min=3, ())}
+      validation={length(~min=5, ())}
       render={
         ({inputClass, inputId, validate}: InputWithValidation.renderState) =>
           <input
