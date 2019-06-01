@@ -19,13 +19,14 @@ module EnhancedInput = {
     <InputWithValidation
       id="name"
       label="Name*"
-      validation={length()}
+      validation={length(~min=3, ())}
       render={
         ({inputClass, inputId, validate}: InputWithValidation.renderState) =>
           <input
             className=inputClass
             id=inputId
             type_="text"
+            placeholder="5 Chars min"
             onChange=updateInput
             onKeyUp=validate
             value
