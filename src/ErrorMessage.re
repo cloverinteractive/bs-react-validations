@@ -3,5 +3,5 @@ let make = (~children, ~className="", ~style=ReactDOMRe.Style.make(), ()) => {
   let messageClass =
     String.length(className) < 1 ? Styles.errorMessage : className;
 
-  <label className=messageClass style> children </label>;
+  <span className=messageClass style> children </span>;
 };
