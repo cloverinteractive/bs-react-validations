@@ -27,6 +27,7 @@
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",
+    "reason-hooks-testing-library",
     "bs-enzyme"
   ],
   "refmt": 3

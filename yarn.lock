@@ -5148,12 +5148,19 @@ react-dom@>=16.8.1, react-dom@^16.8.1:
     prop-types "^15.6.2"
     scheduler "^0.13.6"
 
+react-hooks-testing-library@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-hooks-testing-library/-/react-hooks-testing-library-0.5.0.tgz#571af3522f88ea4ac23c634fb4deff84873f2bc2"
+  integrity sha512-qX4SA28pcCCf1Q23Gtl1VKqQk26pSPTEsdLtfJanDqm4oacT5wadL+e2Xypk/H+AOXN5kdZrWmXkt+hAaiNHgg==
+  dependencies:
+    "@babel/runtime" "^7.4.2"
+
 react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-test-renderer@^16.0.0-0, react-test-renderer@^16.6.0:
+react-test-renderer@^16.0.0-0, react-test-renderer@^16.6.0, react-test-renderer@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.8.6.tgz#188d8029b8c39c786f998aa3efd3ffe7642d5ba1"
   integrity sha512-H2srzU5IWYT6cZXof6AhUcx/wEyJddQ8l7cLM/F7gDXYyPr4oq+vCIxJYXVGhId1J706sqziAjuOEjyNkfgoEw==
@@ -5227,6 +5234,14 @@ realpath-native@^1.1.0:
   integrity sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
   dependencies:
     util.promisify "^1.0.0"
+
+reason-hooks-testing-library@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/reason-hooks-testing-library/-/reason-hooks-testing-library-0.1.3.tgz#2b49fc5229077d230f32a2b9a98753ad6eb62142"
+  integrity sha512-RTvDCfnFPVzS+/jNT5+8fo7yZRNyE/Fw0Shqjn67StGKtFkazWKLojKZrnXEK8mPlE//lNXYM/zyCRmQwH93FA==
+  dependencies:
+    react-hooks-testing-library "^0.5.0"
+    react-test-renderer "^16.8.6"
 
 reason-react@>=0.7.0:
   version "0.7.0"

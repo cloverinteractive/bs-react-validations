@@ -1,3 +1,5 @@
+type t = string => bool;
+
 let emailExpr = [%re "/^([a-z0-9_\\-.])+@([a-z0-9_\\-.])+\\.([a-z]{2,4})$/i"];
 
 let isGreatOrEq = (x: option(int), value: float): bool =>
