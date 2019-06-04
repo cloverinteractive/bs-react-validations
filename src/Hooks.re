@@ -1,6 +1,9 @@
 type validate = (Validations.t, string) => unit;
 
-type touchHook = (bool, unit => unit);
+type touchHook = {
+  isTouched: bool,
+  touch: unit => unit,
+};
 
 type validationHook = {
   isValid: bool,
@@ -8,17 +11,17 @@ type validationHook = {
   validate,
 };
 
-let isTouched = (defaultState: bool): touchHook => {
+let useTouch = (defaultState: bool): touchHook => {
   let (isTouched, dispatch) = React.useState(() => defaultState);
 
   let touch = () => dispatch(_ => true);
 
-  (isTouched, touch);
+  {isTouched, touch};
 };
 
 let useValidations = (startValid: bool): validationHook => {
   let (isValid, dispatch) = React.useState(() => startValid);
-  let (isTouched, touch) = isTouched(!startValid);
+  let {isTouched, touch} = useTouch(!startValid);
 
   let validate = (validation, value) => {
     touch();

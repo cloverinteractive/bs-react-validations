@@ -19,7 +19,8 @@ describe("useValidations", () => {
     act(() =>
       container->result->current.validate(Validations.isEmail, "invalid")
     );
-    expect(container->result->current.isValid) |> toBe(false);
+    expect(container->result->current.isValid) |> toBe(false) |> ignore;
+    expect(container->result->current.isTouched) |> toBe(true);
   });
 
   test("isValid will be true if validation succeeds", () => {
@@ -29,6 +30,22 @@ describe("useValidations", () => {
         "valid@domain.tld",
       )
     );
-    expect(container->result->current.isValid) |> toBe(true);
+    expect(container->result->current.isValid) |> toBe(true) |> ignore;
+    expect(container->result->current.isTouched) |> toBe(true);
+  });
+});
+
+describe("useTouch", () => {
+  open Result;
+
+  let container = renderHook(() => useTouch(false));
+
+  test("isTouched will match the initial State", () =>
+    expect(container->result->current.isTouched) |> toBe(false)
+  );
+
+  test("it can touch", () => {
+    act(container->result->current.touch);
+    expect(container->result->current.isTouched) |> toBe(true);
   });
 });
