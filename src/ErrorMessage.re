@@ -1,9 +1,3 @@
 [@react.component]
-let make =
-    (
-      ~children,
-      ~className=Styles.errorMessage,
-      ~style=ReactDOMRe.Style.make(),
-      (),
-    ) =>
-  <span className style> children </span>;
+let make = (~children, ~className=Styles.errorMessage) =>
+  <span className> children </span>;

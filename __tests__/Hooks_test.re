@@ -12,14 +12,14 @@ describe("useValidations", () => {
   let container = renderHook(() => useValidations(initialState));
 
   test("isValid matches initialState", () =>
-    container->result->current.isValid |> expect |> toEqual(initialState)
+    expect(container->result->current.isValid) |> toEqual(initialState)
   );
 
   test("isValid will be false if validation fails", () => {
     act(() =>
       container->result->current.validate(Validations.isEmail, "invalid")
     );
-    container->result->current.isValid |> expect |> toBe(false);
+    expect(container->result->current.isValid) |> toBe(false);
   });
 
   test("isValid will be true if validation succeeds", () => {
@@ -29,6 +29,6 @@ describe("useValidations", () => {
         "valid@domain.tld",
       )
     );
-    container->result->current.isValid |> expect |> toBe(true);
+    expect(container->result->current.isValid) |> toBe(true);
   });
 });

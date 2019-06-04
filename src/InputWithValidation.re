@@ -19,7 +19,7 @@ let make =
       ~startValid: bool=true,
       ~validation: Validations.t,
     ) => {
-  let {isValid, validate} = useValidations(startValid);
+  let {isValid, isTouched, validate} = useValidations(startValid);
 
   let inputId =
     String.length(id) > 1 ? id : Uuid.V4.create() |> Uuid.V4.toString;
@@ -30,8 +30,8 @@ let make =
   <div className=Styles.withValidation role="presentation">
     <label className=Styles.label htmlFor=inputId>
       label->React.string
-      <div className={Styles.styledInput(isValid)}>
-        <div className="styledInnerInput">
+      <div className={Styles.styledInput(isTouched, isValid)}>
+        <div className={Styles.styledInnerInput(isTouched, isValid)}>
           {
             render({
               inputClass: Styles.validatableInput,
