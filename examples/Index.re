@@ -16,23 +16,24 @@ module EnhancedInput = {
   let make = () => {
     let (value, updateInput) = useValidations("");
 
-    <InputWithValidation
+    <ReactValidations
       id="name"
       label="Name*"
-      validation={length()}
+      validation={hasLength(~min=5, ())}
       render={
-        ({inputClass, inputId, validate}: InputWithValidation.renderState) =>
+        ({inputClass, inputId, validate}: ReactValidations.renderState) =>
           <input
             className=inputClass
             id=inputId
             type_="text"
+            placeholder="5 Chars min"
             onChange=updateInput
             onKeyUp=validate
             value
           />
       }>
       <ErrorMessage> "Name is invalid"->React.string </ErrorMessage>
-    </InputWithValidation>;
+    </ReactValidations>;
   };
 };
 

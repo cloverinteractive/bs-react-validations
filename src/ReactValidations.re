@@ -1,7 +1,5 @@
 open BsUuid;
-
-type validation = string => bool;
-type validate = (validation, ReactEvent.Keyboard.t) => unit;
+open Hooks;
 
 type renderState = {
   inputClass: string,
@@ -11,17 +9,6 @@ type renderState = {
 
 type renderProp = renderState => ReasonReact.reactElement;
 
-let useValidations = (startValid: bool) => {
-  let (state, dispatch) = React.useState(() => startValid);
-
-  let validate = (validation, event) => {
-    let isValid = event->ReactEvent.Keyboard.target##value->validation;
-    dispatch(_ => isValid);
-  };
-
-  (state, validate);
-};
-
 [@react.component]
 let make =
     (
@@ -30,23 +17,26 @@ let make =
       ~label: string="",
       ~render: renderProp,
       ~startValid: bool=true,
-      ~validation: validation,
+      ~validation: Validations.t,
     ) => {
-  let (isValid, validate) = useValidations(startValid);
+  let {isValid, isTouched, validate} = useValidations(startValid);
 
   let inputId =
     String.length(id) > 1 ? id : Uuid.V4.create() |> Uuid.V4.toString;
 
+  let handleValidation = event =>
+    event->ReactEvent.Keyboard.target##value |> validate(validation);
+
   <div className=Styles.withValidation role="presentation">
     <label className=Styles.label htmlFor=inputId>
       label->React.string
-      <div className={Styles.styledInput(isValid)}>
-        <div className="styledInnerInput">
+      <div className={Styles.styledInput(isTouched, isValid)}>
+        <div className={Styles.styledInnerInput(isTouched, isValid)}>
           {
             render({
               inputClass: Styles.validatableInput,
               inputId,
-              validate: validate(validation),
+              validate: handleValidation,
             })
           }
         </div>

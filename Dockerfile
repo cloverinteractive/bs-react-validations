@@ -4,7 +4,6 @@ EXPOSE 8000
 
 WORKDIR /opt/app
 
-
 RUN apt-get update \
   && apt-get -y install curl build-essential git \
   && curl -sL https://deb.nodesource.com/setup_12.x | bash - \
@@ -22,7 +21,6 @@ RUN yarn
 COPY bsconfig.json .
 COPY src ./src
 COPY webpack.config.js .
-
 
 RUN yarn build
 

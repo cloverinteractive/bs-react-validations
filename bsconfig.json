@@ -4,10 +4,20 @@
   "reason": {
     "react-jsx": 3
   },
-  "sources": {
-    "dir" : "src",
-    "subdirs" : true
-  },
+  "sources": [
+    {
+      "dir" : "src",
+      "subdirs" : true
+    },
+    {
+      "dir": "examples",
+      "type": "dev"
+    },
+    {
+      "dir": "__tests__",
+      "type": "dev"
+    }
+  ],
   "package-specs": [{
     "module": "commonjs",
     "in-source": true
@@ -18,6 +28,11 @@
     "bs-css",
     "bs-uuid",
     "reason-react"
+  ],
+  "bs-dev-dependencies": [
+    "@glennsl/bs-jest",
+    "reason-hooks-testing-library",
+    "bs-enzyme"
   ],
   "refmt": 3
 }
