@@ -1,4 +1,6 @@
-# validations
+# DEPRECATED
+
+This was a proof of concept but this project is unmaintained for a better solution checkout [re-formality](https://github.com/MinimaHQ/re-formality)
 
 ## Run Project
 
